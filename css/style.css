@@ -1,0 +1,112 @@
+@media (min-width: 800px) {
+    
+    body {
+        margin: 0;
+        background-color: #333;
+    }
+    html {
+        margin: 1.5vh 1vw 1.5vh 1vw;
+    }
+    
+    /*  ---------  */
+    /* | CONTENT | */
+    /*  ---------  */
+    #content {
+        font-family: OpenSans;
+        background-color: #FFF;
+        margin: auto;
+    }
+    
+    /*  ---------  */
+    /* | CLASSES | */
+    /*  ---------  */
+    #classes {
+        width: 18.5vw;
+        padding: 1vh 1vh 1vh 1vh;
+        height: 94vh;
+        float: left;
+        border-radius: 1vw;
+        box-shadow: 0px 1vh 1vw 0px rgba(0,0,0,0.75);
+        background-color: inherit;
+    }
+    #classes-title {
+        font-size: 3vh;
+        margin: 0;
+        padding: 0;
+    }
+    #classes hr {
+        margin: 0;
+    }
+    #classes-options {
+        width: 100%;
+        text-align: right;
+    }
+    .class {
+        width: 90%;
+        margin: 3% auto;
+        padding: 1% 2%;
+        background-color: #E0e0e0;
+    }
+    .class .name {
+        font-size: 2.4vh;
+    }
+    .class .option {
+        margin-left: 5%;
+    }
+    .class .days, .time {
+        font-size: 2vh;
+        display: inline;
+    }
+    
+    /*  ----------  */
+    /* | CALENDAR | */
+    /*  ----------  */
+    #calendar {
+        width: 76vw;
+        padding: 1vh 1vh 1vh 1vh;
+        height: 94vh;
+        float: right;
+        border-radius: 1vw;
+        box-shadow: 0px 1vh 1vw 0px rgba(0,0,0,0.75);
+        background-color: inherit;
+    }
+    #calendar hr {
+        margin-top: 0;
+        margin-bottom: 1vh;
+    }
+    #calendar-title {
+        font-size: 3vh;
+    }
+    #calendar-content {
+        font-size: 0;
+        width: 74vw;
+        margin: auto;
+        overflow: auto;
+        border: 1px solid #888;
+    }
+    #calendar-content hr {
+        margin: 0;
+        color: #888;
+        background-color: #888;
+    }
+    #calendar-content .hour-marks {
+        float: left;
+        font-size: 2.4vh;
+        margin: 0;
+        width: 1.9%;
+        height: 88vh;
+        border-right: 1px solid #888;
+    }
+    #calendar-content .day {
+        float: left;
+        text-align: center;
+        font-size: 2.4vh;
+        margin: 0;
+        width: 14%;
+        height: 88vh;
+    }
+    
+}
+@media (max-width: 800px) {
+    
+}

@@ -3,4 +3,7 @@ function Class(name, crn, time, days) {
     this.crn  = crn;
     this.time = time;
     this.days = days;
+    this.add_to_list = function(container) {
+        
+    }
 }
