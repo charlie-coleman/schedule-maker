@@ -1,4 +1,10 @@
+// ALL HOURS IN THE CODE MUST BE IN 24 HOUR FORMAT, IT'S JUST EASIER
+
+//CHANGE DEPENDING ON IF YOU WANT FINAL DISPLAY NUMBERS TO BE IN 24 OR 12 HOUR FORMAT
 var twentyfourhour = false;
+
+// FUNCTION TO GENERATE THE LINES TO DEMARCATE HOURS AND ADD THE NUMBERS TO HOUR-MARKS
+// PROBABLY MORE COMPLICATED THAN IT NEEDS TO BE, BUT FLEXIBLE
 var generate_hourmarks = function(begin, end) {
     var num_marks = end - begin;
     var num_days = $('.day').length;
@@ -14,6 +20,7 @@ var generate_hourmarks = function(begin, end) {
         'width':'100%',
         'border-bottom': '1px solid #888'
     });
+    $('.hour-marks').empty();
     for(var i = 0; i < num_marks+1; i++) {
         var label = (begin + i);
         if (!twentyfourhour){
@@ -30,7 +37,7 @@ var generate_hourmarks = function(begin, end) {
         label = label.toString();
         $('.hour-marks').append('<div class="hour-mark" id="hm'+i+'">'+label+'</div>');
         if(i != num_marks) {
-            var loc = $($('.hour')[i]).position().top - $(window).height()*0.012;
+            var loc = $($('.hour')[i]).position().top - $(window).height()*0.015;
             $('#hm'+i).css({
                 'position': 'absolute',
                 'top' : loc.toString(),
@@ -38,7 +45,7 @@ var generate_hourmarks = function(begin, end) {
             });
         }
         else {
-            var loc = $($('.hour')[i-1]).position().top + $($('.hour')[i]).height()-$(window).height()*0.011;
+            var loc = $($('.hour')[i-1]).position().top + $($('.hour')[i]).height()-$(window).height()*0.015;
             $('#hm'+i).css({
                 'position': 'absolute',
                 'top' : loc.toString(),
@@ -47,10 +54,14 @@ var generate_hourmarks = function(begin, end) {
         }
     }
     $('.hour-mark').css({
-        'width' : '3.3%',
+        'width' : 'inherit',
         'text-align' : 'right'
     })
 }
 $(document).ready(function() {
     generate_hourmarks(7,18);
 });
+
+$(window).resize(function() {
+    generate_hourmarks(7,18);
+})

@@ -79,7 +79,6 @@
     }
     #calendar-content {
         font-size: 0;
-        width: 74vw;
         margin: auto;
         overflow: auto;
         border-top: 1px solid #888;
