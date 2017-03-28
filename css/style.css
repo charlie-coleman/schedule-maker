@@ -82,7 +82,9 @@
         width: 74vw;
         margin: auto;
         overflow: auto;
-        border: 1px solid #888;
+        border-top: 1px solid #888;
+        border-left: 1px solid #888;
+        border-bottom: 1px solid #888;
     }
     #calendar-content hr {
         margin: 0;
@@ -91,21 +93,26 @@
     }
     #calendar-content .hour-marks {
         float: left;
-        font-size: 2.4vh;
+        font-size: 2.2vh;
         margin: 0;
-        width: 1.9%;
+        width: 3.4vw;
         height: 88vh;
         border-right: 1px solid #888;
+        overflow: hidden;
+        text-align: right;
     }
     #calendar-content .day {
         float: left;
         text-align: center;
         font-size: 2.4vh;
         margin: 0;
-        width: 14%;
+        width: 10vw;
+        border-right: 1px solid #888;
         height: 88vh;
     }
-    
+    .hour-mark {
+        
+    }
 }
 @media (max-width: 800px) {
     
