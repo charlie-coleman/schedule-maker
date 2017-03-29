@@ -49,6 +49,7 @@
     }
     .class .name {
         font-size: 2.4vh;
+        display: inline;
     }
     .class .option {
         margin-left: 5%;
@@ -56,6 +57,12 @@
     .class .days, .time {
         font-size: 2vh;
         display: inline;
+    }
+    .class .days {
+        margin-right: 5%;
+    }
+    .class .edit {
+        float: right;
     }
     
     /*  ----------  */
@@ -111,6 +118,84 @@
     }
     .hour-mark {
         
+    }
+    .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
+
+    /* Modal Content/Box */
+    #add-class-content {
+        background-color: #fefefe;
+        margin: 5% auto; /* 15% from the top and centered */
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%; /* Could be more or less, depending on screen size */
+        font-size: 2.4vh;
+    }
+    #add-class-content hr {
+        margin-top: 0;
+    }
+
+    /* The Close Button */
+    #close-menu {
+        color: #333;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        background-color: #fefefe;
+        border: 0px;
+    }
+    #close-menu:hover,
+    #close-menu:focus {
+        color: #b40000;
+        text-decoration: none;
+        cursor: pointer;
+    }
+    
+    #add-class-content .title {
+        font-size: 3vh;
+    }
+    #add-class-form #add-option {
+        
+    }
+    #days-of-week .title {
+        font-size: 2.4vh;
+        display: inline-block;
+    }
+    #add-class-content .add-class-option {
+        border: 1px solid #888;
+        width: 90%;
+        margin: 1% auto;
+    }
+    .weekDays-selector {
+        display: inline-block;
+    }
+    .weekDays-selector input {
+        display: none!important;
+    }
+    .weekDays-selector input[type=checkbox] + label {
+        display: inline-block;
+        font-size: 2.2vh;
+        border-radius: 6px;
+        background: #dddddd;
+        height: 3.5vh;
+        width: 3.5vh;
+        line-height: 3.7vh;
+        text-align: center;
+        cursor: pointer;
+    }
+    .weekDays-selector input[type=checkbox]:checked + label {
+        background: #2AD705;
+        color: #ffffff;
     }
 }
 @media (max-width: 800px) {

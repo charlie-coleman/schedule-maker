@@ -15,23 +15,10 @@
             <div id="classes-title">Classes</div>
             <hr>
             <div id="classes-options">
-                <button id="add-class" onclick="javascript:void(0);"><i class='fa fa-plus'></i></button>
+                <button id="add-class" onclick="javascript:open_add_class();"><i class='fa fa-plus'></i></button>
             </div>
             <hr>
             <div id="classes-list">
-                <div class='class'>
-                    <div class='name'>Circuits II</div>
-                    <form>
-                    <input type="radio" name="class1" value="1" class="option">
-                        <div class='days'>MWF</div>
-                        <div class='time'>9:00AM-9:50AM</div>
-                        <br>
-                    <input type="radio" name="class1" value="2" class="option">
-                        <div class='days'>TR</div>
-                        <div class='time'>9:30AM-10:45AM</div>
-                        <br>
-                    </form>
-                </div>
             </div>
         </div>
         <div id="calendar">
@@ -64,8 +51,42 @@
                 </div>
             </div>
         </div>
-        <div id="new-class" style="display: none;">
-        
+        <div id="add-class" class="modal">
+            <!-- Modal content -->
+            <div id="add-class-content">
+                <div class='title'>Add or Edit a Class</div><hr>
+                <button id='close-menu' onclick='javascript:cancel_class_edit();'><i class="fa fa-times" aria-hidden="true"></i></button>
+                
+                <form id='add-class-form' onsubmit="return false">
+                    Name of class: <input type='text' id='add-class-name'><br>
+                    Add Option: <button id='add-option' onclick='javascript:add_class_option();'><i class='fa fa-plus' aria-hidden='true'></i></button>
+                    <div id='option0' class='add-class-option'>
+                        Registration Number: <input type='text' id='reg-num0'>
+                        <button id='remove-option0' onclick='remove_option(0);' style='float:right;'><i class='fa fa-minus' aria-hidden='true'></i></button>
+                        <div id='days-of-week'>
+                            <div class='title'>What days?</div>
+                            <div class="weekDays-selector">
+                                <input type="checkbox" id="weekday-sun0" class="weekday" />
+                                <label for="weekday-sun0">S</label>
+                                <input type="checkbox" id="weekday-mon0" class="weekday" />
+                                <label for="weekday-mon0">M</label>
+                                <input type="checkbox" id="weekday-tue0" class="weekday" />
+                                <label for="weekday-tue0">T</label>
+                                <input type="checkbox" id="weekday-wed0" class="weekday" />
+                                <label for="weekday-wed0">W</label>
+                                <input type="checkbox" id="weekday-thu0" class="weekday" />
+                                <label for="weekday-thu0">R</label>
+                                <input type="checkbox" id="weekday-fri0" class="weekday" />
+                                <label for="weekday-fri0">F</label>
+                                <input type="checkbox" id="weekday-sat0" class="weekday" />
+                                <label for="weekday-sat0">S</label>
+                            </div>
+                        </div>
+                        Start time: <input type='time' id='start-time0'> End time: <input type='time' id='end-time0'><br>
+                    </div>
+                </form>
+                <button id='finish-add-class' onclick='javascript:add_class();'>Done!</button>
+            </div>
         </div>
     </div>
 </html>
