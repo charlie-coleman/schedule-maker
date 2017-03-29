@@ -3,6 +3,10 @@
 //CHANGE DEPENDING ON IF YOU WANT FINAL DISPLAY NUMBERS TO BE IN 24 OR 12 HOUR FORMAT
 var twentyfourhour = true;
 
+// Start and end of hour marks
+var start_hour_marks = 7;
+var end_hour_marks = 18;
+
 // FUNCTION TO GENERATE THE LINES TO DEMARCATE HOURS AND ADD THE NUMBERS TO HOUR-MARKS
 // PROBABLY MORE COMPLICATED THAN IT NEEDS TO BE, BUT FLEXIBLE
 var generate_hourmarks = function(begin, end) {
@@ -58,9 +62,12 @@ var generate_hourmarks = function(begin, end) {
         'text-align' : 'right'
     })
 }
+
 var classes = [];
+
+
 $(document).ready(function() {
-    generate_hourmarks(7,18);
+    generate_hourmarks(start_hour_marks, end_hour_marks);
     reset_class_list();
 });
 
@@ -138,6 +145,18 @@ function add_class() {
                            $('#weekday-wed'+i).prop('checked'),$('#weekday-thu'+i).prop('checked'),$('#weekday-fri'+i).prop('checked'),
                            $('#weekday-sat'+i).prop('checked')];
         times_arr[i] = [$('#start-time'+i).val(),$('#end-time'+i).val()]
+        var needgen = false;
+        if (times_arr[i][0].substr(0,2) < start_hour_marks) {
+            start_hour_marks = parseInt(times_arr[i][0].substr(0,2));
+            needgen = true;
+        }
+        if (times_arr[i][1].substr(0,2) > end_hour_marks) {
+            end_hour_marks = parseInt(times_arr[i][1].substr(0,2));
+            needgen = true;
+        }
+        if (needgen) {
+            generate_hourmarks(start_hour_marks, end_hour_marks);
+        }
     }
     classes[classes.length] = new Class(class_name, reg_num, times_arr, days_arr);
     for(var i = $('.add-class-option').length-1; i > 0; i--) {
@@ -146,6 +165,27 @@ function add_class() {
     $('#add-class-form')[0].reset();
     $('.modal').css('display', 'none');
     reset_class_list();
+}
+
+function edit_class(id) {
+    $('.modal').css('display', 'block');
+    for(var i = 0; i < classes[id].crns.length-1; i++) {
+        add_class_option();
+    }
+    $('#add-class-name').val(classes[id].name);
+    for(var i = 0; i < classes[id].crns.length; i++) {
+        $('#reg-num'+i).val(classes[id].crns[i]);
+        $('#weekday-sun'+i).prop('checked', classes[id].days[i][0]);
+        $('#weekday-mon'+i).prop('checked', classes[id].days[i][1]);
+        $('#weekday-tue'+i).prop('checked', classes[id].days[i][2]);
+        $('#weekday-wed'+i).prop('checked', classes[id].days[i][3]);
+        $('#weekday-thu'+i).prop('checked', classes[id].days[i][4]);
+        $('#weekday-fri'+i).prop('checked', classes[id].days[i][5]);
+        $('#weekday-sat'+i).prop('checked', classes[id].days[i][6]);
+        $('#start-time'+i).val(classes[id].times[i][0]);
+        $('#end-time'+i).val(classes[id].times[i][1]);
+    }
+    classes.splice(id, 1);
 }
 
 function cancel_class_edit() {
