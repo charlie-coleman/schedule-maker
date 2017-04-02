@@ -1,11 +1,14 @@
 // ALL HOURS IN THE CODE MUST BE IN 24 HOUR FORMAT, IT'S JUST EASIER
 
 //CHANGE DEPENDING ON IF YOU WANT FINAL DISPLAY NUMBERS TO BE IN 24 OR 12 HOUR FORMAT
-var twentyfourhour = true;
+var twentyfourhour = false;
 
 // Start and end of hour marks
 var start_hour_marks = 7;
 var end_hour_marks = 18;
+
+// Array to hold the classes in list
+var classes = [];
 
 // FUNCTION TO GENERATE THE LINES TO DEMARCATE HOURS AND ADD THE NUMBERS TO HOUR-MARKS
 // PROBABLY MORE COMPLICATED THAN IT NEEDS TO BE, BUT FLEXIBLE
@@ -15,10 +18,11 @@ var generate_hourmarks = function(begin, end) {
     for(var i = 0; i < num_days; i++) {
         $($('.day')[i]).find('.hour').remove();
         for(var j = 0; j < num_marks; j++) {
-            $($('.day')[i]).append('<div class="hour"></div>');
+            $($('.day')[i]).append('<div class="hour" id="hourdiv'+(begin+j)+'"></div>');
         }
     }
-    var hour_width = Math.floor(($($('.day')[0]).height()-50)/num_marks);
+    var hour_width = Math.floor(($($('.day')[0]).height()*0.9)/num_marks);
+    console.log($($('.day')[0]).height());
     $('.hour').css({
         'height':hour_width.toString(),
         'width':'100%',
@@ -41,7 +45,7 @@ var generate_hourmarks = function(begin, end) {
         label = label.toString();
         $('.hour-marks').append('<div class="hour-mark" id="hm'+i+'">'+label+'</div>');
         if(i != num_marks) {
-            var loc = $($('.hour')[i]).position().top - $(window).height()*0.012;
+            var loc = $($('.hour')[i]).position().top - 10;
             $('#hm'+i).css({
                 'position': 'absolute',
                 'top' : loc.toString(),
@@ -49,7 +53,7 @@ var generate_hourmarks = function(begin, end) {
             });
         }
         else {
-            var loc = $($('.hour')[i-1]).position().top + $($('.hour')[i]).height()-$(window).height()*0.015;
+            var loc = $($('.hour')[i-1]).position().top + $($('.hour')[i]).height()-10;
             $('#hm'+i).css({
                 'position': 'absolute',
                 'top' : loc.toString(),
@@ -58,29 +62,34 @@ var generate_hourmarks = function(begin, end) {
         }
     }
     $('.hour-mark').css({
-        'width' : 'inherit',
+        'width' : $($(".hourmarks")[0]).width(),
         'text-align' : 'right'
     })
 }
 
-var classes = [];
-
-
-$(document).ready(function() {
-    generate_hourmarks(start_hour_marks, end_hour_marks);
-    reset_class_list();
-});
-
-var reset_class_list = function() {
-    $('#classes-list').empty();
-    for (var i = 0; i < classes.length; i++) {
-        classes[i].add_to_list($('#classes-list'), twentyfourhour);
+function eval_window() {
+    if($(window).width() <= $(window).height()) {
+        $("#size-stylesheet").attr('href', './css/mobile-style.css');
+    }
+    else {
+        $("#size-stylesheet").attr('href', './css/desktop-style.css');
     }
 }
 
-$(window).resize(function() {
-    generate_hourmarks(7,18);
-})
+var reset_class_list = function() {
+    var curr_selected = []
+    for(var i = 0; i < classes.length; i ++) {
+        curr_selected[i] = $('input[type=radio][name=classlist'+classes[i].id+']').index($('input[type=radio][name=classlist'+classes[i].id+']:checked'));
+        if (curr_selected[i] == -1) {
+            curr_selected[i] == 'none';
+        }
+    }
+    $('#classes-list').empty();
+    for (var i = 0; i < classes.length; i++) {
+        classes[i].add_to_list($('#classes-list'), twentyfourhour, curr_selected[i]);
+    }
+}
+
 function tConvert (time) {
     // Check correct time format and split into components
     time = time.toString ().match (/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
@@ -134,6 +143,7 @@ function remove_option(id) {
     }
     $($('.add-class-option')[num_options-1]).remove()
 }
+
 function add_class() {
     var class_name = $('#add-class-name').val();
     var reg_num = [];
@@ -150,21 +160,24 @@ function add_class() {
             start_hour_marks = parseInt(times_arr[i][0].substr(0,2));
             needgen = true;
         }
-        if (times_arr[i][1].substr(0,2) > end_hour_marks) {
+        if (times_arr[i][1].substr(0,2) >= end_hour_marks) {
             end_hour_marks = parseInt(times_arr[i][1].substr(0,2));
             needgen = true;
         }
+    }
+    if(validate_data(class_name, reg_num, days_arr, times_arr)) {
+        classes[classes.length] = new Class(class_name, reg_num, times_arr, days_arr);
+        for(var i = $('.add-class-option').length-1; i > 0; i--) {
+            $($('.add-class-option'))[i].remove();
+        }
+        $('#add-class-form')[0].reset();
+        $('.modal').css('display', 'none');
+        reset_class_list();
         if (needgen) {
-            generate_hourmarks(start_hour_marks, end_hour_marks);
+            generate_hourmarks(start_hour_marks, end_hour_marks+1);
         }
     }
-    classes[classes.length] = new Class(class_name, reg_num, times_arr, days_arr);
-    for(var i = $('.add-class-option').length-1; i > 0; i--) {
-        $($('.add-class-option'))[i].remove();
-    }
-    $('#add-class-form')[0].reset();
-    $('.modal').css('display', 'none');
-    reset_class_list();
+    generate_hourmarks(start_hour_marks,end_hour_marks);
 }
 
 function edit_class(id) {
@@ -194,7 +207,60 @@ function cancel_class_edit() {
         $($('.add-class-option'))[i].remove();
     }
     $('#add-class-form')[0].reset();
+    generate_hourmarks(start_hour_marks,end_hour_marks);
 }
+
 function open_add_class() {
     $('.modal').css('display', 'block');
 }
+
+function validate_data(class_name, reg_num, days_arr, times_arr) {
+    if(class_name == '' || class_name == null || class_name == undefined) {
+        alert('Your class needs a name!');
+        return false;
+    }
+    for(var i = 0; i < reg_num.length; i++) {
+        for(var j = i+1; j < reg_num.length; j++) {
+            if (reg_num[i] == reg_num[j]) {
+                alert('Option #' + (i+1) + ' and option #' + (j+1) + ' have the same registration number!');
+                return false;
+            }
+        }
+        if(reg_num[i] == '' || reg_num[i] == null || reg_num[i] == undefined) {
+            alert('Option #'+(i+1)+' is missing a class registration number!');
+            return false;
+        }
+        if(days_arr[i] == [0,0,0,0,0,0,0]) {
+            alert('Must select at least one day in option #' + (i+1));
+            return false;
+        }
+        if(parseInt(times_arr[i][0].substr(0,2)) >= parseInt(times_arr[i][1].substr(0,2))) {
+            if(parseInt(times_arr[i][0].substr(0,2)) == parseInt(times_arr[i][1].substr(0,2))) {
+                if (parseInt(times_arr[i][0].substr(3,5)) >= parseInt(times_arr[i][1].substr(3,5))) {
+                    alert("Option #" + (i+1) + " ends before it begins!");
+                    return false;
+                }
+            }
+            else {
+                alert("Option #" + (i+1) + " ends before it begins!");
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+
+
+$(window).resize(function() {
+    eval_window();
+    for(var i = 0; i < classes.length; i++) {
+        classes[i].add_to_calendar();
+    }
+    generate_hourmarks(start_hour_marks,end_hour_marks);
+});
+$(document).ready(function() {
+    eval_window();
+    reset_class_list();
+    generate_hourmarks(start_hour_marks, end_hour_marks);
+});
