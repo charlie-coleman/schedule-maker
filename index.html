@@ -1,21 +1,13 @@
 <html>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <head>
         <title>Schedule Maker</title>
-        <link rel="stylesheet" type="text/css" href="./resources/font-awesome/css/font-awesome.min.css">
-        <link rel="stylesheet" href="./fonts/opensans.css">
-        <link id="size-stylesheet" rel="stylesheet" type="text/css" href="./css/mobile-style.css" />
-        <link rel="icon" href="./resources/favicon.ico">
-        <script src="./resources/jquery.js"></script>
-        <script>
-            if($(window).width() <= $(window).height()) {
-                $("#size-stylesheet").attr('href', './css/mobile-style.css');
-            }
-            else {
-                $("#size-stylesheet").attr('href', './css/desktop-style.css');
-            }
-        </script>
-        <script src="./js/Class.js"></script>
-        <script src="./js/Main.js"></script>
+        <link rel="icon" href="../resources/favicon.ico">
+        <link rel="stylesheet" type="text/css" href="../resources/font-awesome/css/font-awesome.min.css">
+        <link rel="stylesheet" href="../fonts/opensans.css">
+        <link rel="stylesheet" type="text/css" href="./css/style.min.css" />
+        <link rel="stylesheet" type="text/css" href="../resources/font-awesome/css/font-awesome.min.css">
+        <link rel="stylesheet" href="../fonts/opensans.css">
     </head>
     <div id="content">
         <div id="classes">
@@ -96,4 +88,7 @@
             </div>
         </div>
     </div>
+    <script src="../resources/jquery.js"></script>
+    <script src="./js/Class.min.js"></script>
+    <script src="./js/Main.min.js"></script>
 </html>

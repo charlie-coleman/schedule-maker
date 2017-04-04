@@ -22,7 +22,6 @@ var generate_hourmarks = function(begin, end) {
         }
     }
     var hour_width = Math.floor(($($('.day')[0]).height()*0.9)/num_marks);
-    console.log($($('.day')[0]).height());
     $('.hour').css({
         'height':hour_width.toString(),
         'width':'100%',
@@ -65,15 +64,6 @@ var generate_hourmarks = function(begin, end) {
         'width' : $($(".hourmarks")[0]).width(),
         'text-align' : 'right'
     })
-}
-
-function eval_window() {
-    if($(window).width() <= $(window).height()) {
-        $("#size-stylesheet").attr('href', './css/mobile-style.css');
-    }
-    else {
-        $("#size-stylesheet").attr('href', './css/desktop-style.css');
-    }
 }
 
 var reset_class_list = function() {
@@ -251,16 +241,14 @@ function validate_data(class_name, reg_num, days_arr, times_arr) {
 }
 
 
-
 $(window).resize(function() {
-    eval_window();
     for(var i = 0; i < classes.length; i++) {
         classes[i].add_to_calendar();
     }
     generate_hourmarks(start_hour_marks,end_hour_marks);
 });
-$(document).ready(function() {
-    eval_window();
+
+$(window).on('load', function() {
     reset_class_list();
     generate_hourmarks(start_hour_marks, end_hour_marks);
 });

@@ -3,11 +3,15 @@ body {
     background-color: #333;
 }
 html {
-    margin: 1.5vh 1vw 1.5vh 1vw;
+    margin: 0;
+    margin: 0;
     font-family: OpenSans;
 }
 
 #content {
+    padding: 1.5vh 1vw 1.5vh 1vw;
+    width: 98%;
+    height: 97%;
     font-family: OpenSans;
     margin: auto;
 }
@@ -24,7 +28,7 @@ html {
     box-shadow: 0px 1vh 1vw 0px rgba(0,0,0,0.75);
 }
 #classes-title {
-    font-size: 32;
+    font-size: 2em;
     margin: 0;
     padding: 0;
 }
@@ -42,42 +46,46 @@ html {
     background-color: #E0e0e0;
 }
 .class .name {
-    font-size: 16;
+    font-size: 1em;
     display: inline;
 }
 .class .option {
     margin-left: 5%;
 }
 .class .days, .time {
-    font-size: 16;
+    font-size: 0.875em;
     display: inline;
 }
 .class .days {
     margin-right: 5%;
 }
-.class .edit {
+.class .edit, .remove_class {
     float: right;
+    margin: auto 3;
 }
 .class .crn-label {
-    font-size: 11px;
+    font-size: 0.6875em;
     display: inline-block;
 }
 
 
+/*  ----------  */
+/* | CALENDAR | */
+/*  ----------  */
 #calendar {
     background-color: #FFF;
-    width: 94vw;
-    padding: 1vh 1vh 1vh 1vh;
-    height: 60vw;
-    border-radius: 1vw;
+    width: 96%;
+    padding: 1% 1% 1% 1%;
+    height: 65vw;
+    border-radius: 1%;
     box-shadow: 0px 1vh 1vw 0px rgba(0,0,0,0.75);
 }
 #calendar hr {
     margin-top: 0;
-    margin-bottom: 1vh;
+    margin-bottom: 1%;
 }
 #calendar-title {
-    font-size: 32;
+    font-size: 1.8em;
 }
 #calendar-content {
     font-size: 0;
@@ -97,10 +105,10 @@ html {
 }
 #calendar-content .hour-marks {
     float: left;
-    font-size: 10;
+    font-size: 0.625em;
     margin: 0;
     width: 4%;
-    height: 92%;
+    height: 85%;
     border-right: 1px solid #888;
     overflow: hidden;
     text-align: right;
@@ -108,11 +116,11 @@ html {
 #calendar-content .day {
     float: left;
     text-align: center;
-    font-size: 16;
+    font-size: 1em;
     margin: 0;
     width: 13.5%;
     border-right: 1px solid #888;
-    height: 92%;
+    height: 85%;
 }
 
 
@@ -135,7 +143,7 @@ html {
     padding: 20px;
     border: 1px solid #888;
     width: 80%; /* Could be more or less, depending on screen size */
-    font-size: 16;
+    font-size: 1em;
 }
 #add-class-content hr {
     margin-top: 0;
@@ -156,19 +164,20 @@ html {
 }
 
 #add-class-content .title {
-    font-size: 20px;
-}
-#add-class-form #add-option {
-
+    font-size: 1.25em;
 }
 #days-of-week .title {
-    font-size: 16;
+    font-size: 1em;
     display: inline-block;
 }
 #add-class-content .add-class-option {
     border: 1px solid #888;
     width: 90%;
     margin: 1% auto;
+}
+#add-class-content input[type=text] {
+    font-family: OpenSans, sans-serif;
+    font-size: 0.875em;
 }
 .weekDays-selector {
     display: inline-block;
@@ -178,12 +187,12 @@ html {
 }
 .weekDays-selector input[type=checkbox] + label {
     display: inline-block;
-    font-size: 14;
+    font-size: 0.875em;
     border-radius: 6px;
     background: #dddddd;
-    height: 24;
-    width: 24;
-    line-height: 26px;
+    height: 1.5em;
+    width: 1.5em;
+    line-height: 1.625em;
     text-align: center;
     cursor: pointer;
 }
@@ -193,15 +202,76 @@ html {
 }
 
 ::-webkit-scrollbar {
-    width: 12px;
+    width: 6px;
 }
- 
+
 ::-webkit-scrollbar-track {
-    border-radius: 10px;
+    border-radius: 3px;
+    background-color: #FFF;
 }
- 
+
 ::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    color: #000;
-    background-color: #000;
+    border-radius: 3px;
+    background-color: #111;
+}
+
+
+@media (orientation: landscape) and (min-width: 900px){
+    /*  ---------  */
+    /* | CONTENT | */
+    /*  ---------  */
+    #content {
+        background-color: #333;
+    }
+
+    /*  ---------  */
+    /* | CLASSES | */
+    /*  ---------  */
+    #classes {
+        width: 19%;
+        height: 96%;
+        float: left;
+        border-radius: 0;
+        border-bottom-left-radius: 1vw;
+        border-top-left-radius: 1vw;
+        overflow: scroll;
+    }
+
+    /*  ----------  */
+    /* | CALENDAR | */
+    /*  ----------  */
+    #calendar {
+        width: 77%;
+        height: 94%;
+        float: right;
+        border-radius: 0;
+        border-bottom-right-radius: 1vw;
+        border-top-right-radius: 1vw;
+    }
+    #calendar-content .hour-marks {
+        float: left;
+        margin: 0;
+        width: 4%;
+        height: 92%;
+        border-right: 1px solid #888;
+        overflow: hidden;
+        text-align: right;
+    }
+    #calendar-content .day {
+        width: 13.57%;
+        height: 92%;
+    }
+
+    ::-webkit-scrollbar {
+        width: 12px;
+    }
+
+    ::-webkit-scrollbar-track {
+        border-radius: 6px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        border-radius: 6px;
+        background-color: #333;
+    }
 }

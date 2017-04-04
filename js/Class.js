@@ -80,6 +80,7 @@ function Class(name, crns, times, days, color) {
         }
         container.append("<div class='class' id='classlist"+this.id+"'></div>");
         $('#classlist'+this.id).append("<div class='name'>"+$('<div/>').text(this.name).html()+"</div>");
+        $('#classlist'+this.id).append("<button class='remove_class' onclick='javascript:remove_class("+this.id+");'><i class='fa fa-minus' aria-hidden='true'></i></button>")
         $('#classlist'+this.id).append("<button class='edit' onclick='javascript:edit_class("+this.id+");'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></button>");
         $('#classlist'+this.id).append("<form id='class"+this.id+"form"+"'></form>");
         for (var i = 0; i < crns.length; i++) {
