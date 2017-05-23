@@ -2,62 +2,64 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <head>
         <title>Schedule Maker</title>
-        <link rel="icon" href="../resources/favicon.ico">
-        <link rel="stylesheet" type="text/css" href="../resources/font-awesome/css/font-awesome.min.css">
-        <link rel="stylesheet" href="../fonts/opensans.css">
-        <link rel="stylesheet" type="text/css" href="./css/style.min.css" />
-        <link rel="stylesheet" type="text/css" href="../resources/font-awesome/css/font-awesome.min.css">
-        <link rel="stylesheet" href="../fonts/opensans.css">
+        <link rel="icon" href="/resources/favicon.ico">
     </head>
+    
     <div id="content">
+        
         <div id="classes">
             <div id="classes-title">Classes</div>
             <hr>
             <div id="classes-options">
+                <button id="clear-list" onclick='javascript:clear_class_list();'>Clear List</button>
                 <button id="add-class" onclick="javascript:open_add_class();"><i class='fa fa-plus'></i></button>
             </div>
             <hr>
             <div id="classes-list">
             </div>
         </div>
+        
         <div id="calendar">
             <div id="calendar-title">Weekly Schedule</div>
             <hr>
             <div id="calendar-content">
-                <div class="hour-marks">
+                <div id='hms' class="hour-marks">
                     
                 </div>
-                <div id="sunday" class="day">
-                    <div class="title">Sunday</div><hr>
-                </div>
-                <div id="monday" class="day">
-                    <div class="title">Monday</div><hr>
-                </div>
-                <div id="tuesday" class="day">
-                    <div class="title">Tuesday</div><hr>
-                </div>
-                <div id="wednesday" class="day">
-                    <div class="title">Wednesday</div><hr>
-                </div>
-                <div id="thursday" class="day">
-                    <div class="title">Thursday</div><hr>
-                </div>
-                <div id="friday" class="day">
-                    <div class="title">Friday</div><hr>
-                </div>
-                <div id="saturday" class="day">
-                    <div class="title">Saturday</div><hr>
+                <div id='dh'>
+                    <div id="sunday" class="day">
+                        <div class="title">Sun</div><hr>
+                    </div>
+                    <div id="monday" class="day">
+                        <div class="title">Mon</div><hr>
+                    </div>
+                    <div id="tuesday" class="day">
+                        <div class="title">Tues</div><hr>
+                    </div>
+                    <div id="wednesday" class="day">
+                        <div class="title">Wed</div><hr>
+                    </div>
+                    <div id="thursday" class="day">
+                        <div class="title">Thurs</div><hr>
+                    </div>
+                    <div id="friday" class="day">
+                        <div class="title">Fri</div><hr>
+                    </div>
+                    <div id="saturday" class="day">
+                        <div class="title">Sat</div><hr>
+                    </div>
                 </div>
             </div>
         </div>
+            
         <div id="add-class" class="modal">
             <!-- Modal content -->
             <div id="add-class-content">
                 <div class='title'>Add or Edit a Class</div><hr>
                 <button id='close-menu' onclick='javascript:cancel_class_edit();'><i class="fa fa-times" aria-hidden="true"></i></button>
-                
                 <form id='add-class-form' onsubmit="return false">
                     Name of class: <input type='text' id='add-class-name'><br>
+                    Color: <input id='add-class-color' class='jscolor' value='#FFFFFF'><br>
                     Add Option: <button id='add-option' onclick='javascript:add_class_option();'><i class='fa fa-plus' aria-hidden='true'></i></button>
                     <div id='option0' class='add-class-option'>
                         Registration Number: <input type='text' id='reg-num0'>
@@ -81,14 +83,21 @@
                                 <label for="weekday-sat0">S</label>
                             </div>
                         </div>
-                        Start time: <input type='time' id='start-time0'> End time: <input type='time' id='end-time0'><br>
+                        Start time: <input type='time' size="10" id='start-time0'> End time: <input type='time' size='10' id='end-time0'><br>
                     </div>
                 </form>
-                <button id='finish-add-class' onclick='javascript:add_class();'>Done!</button>
+                <button type='submit' id='finish-add-class' onclick='javascript:add_class();'>Done!</button>
             </div>
         </div>
     </div>
-    <script src="../resources/jquery.js"></script>
+    <link rel="stylesheet" type="text/css" href='/resources/css/palette.css'>
+    <link rel="stylesheet" type="text/css" href="/resources/css/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/resources/fonts/opensans.css">
+    <link rel="stylesheet" type="text/css" href="./css/style.min.css">
+    <script src="/resources/js/jquery.js"></script>
+    <script src="./js/jscolor.min.js"></script>
     <script src="./js/Class.min.js"></script>
-    <script src="./js/Main.min.js"></script>
+    <script src="./js/Encode.min.js"></script>
+    <script src="./js/Main.js"></script>
+    <script src="/resources/js/tracking.js"></script>
 </html>

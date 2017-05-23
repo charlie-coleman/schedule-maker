@@ -1,17 +1,18 @@
 body {
     margin: 0;
-    background-color: #333;
+    padding: 0;
+    background-color: var(--mono5);
 }
 html {
     margin: 0;
-    margin: 0;
+    padding: 0;
     font-family: OpenSans;
 }
 
 #content {
-    padding: 1.5vh 1vw 1.5vh 1vw;
+    padding: 1.5% 1% 1.5% 1%;
     width: 98%;
-    height: 97%;
+    height: 93%;
     font-family: OpenSans;
     margin: auto;
 }
@@ -20,15 +21,14 @@ html {
 /* | CLASSES | */
 /*  ---------  */
 #classes {
-    background-color: #FFF;
-    width: 94vw;
-    padding: 1vh 1vh 1vh 1vh;
-    border-radius: 1vw;
+    background-color: var(--mono1);
+    width: 96%;
+    padding: 1% 1% 1% 1%;
     margin-bottom: 20;
-    box-shadow: 0px 1vh 1vw 0px rgba(0,0,0,0.75);
+    box-shadow: 0.6vmax 0.6vmax 0 0px var(--mono9);
 }
 #classes-title {
-    font-size: 2em;
+    font-size: 1.75em;
     margin: 0;
     padding: 0;
 }
@@ -43,7 +43,7 @@ html {
     width: 90%;
     margin: 3% auto;
     padding: 1% 2%;
-    background-color: #E0e0e0;
+    background-color: var(--mono3);
 }
 .class .name {
     font-size: 1em;
@@ -59,7 +59,7 @@ html {
 .class .days {
     margin-right: 5%;
 }
-.class .edit, .remove_class {
+.class .edit, .removeclass {
     float: right;
     margin: auto 3;
 }
@@ -73,54 +73,57 @@ html {
 /* | CALENDAR | */
 /*  ----------  */
 #calendar {
-    background-color: #FFF;
+    background-color: var(--mono1);
     width: 96%;
+    height: 70%;
     padding: 1% 1% 1% 1%;
-    height: 65vw;
-    border-radius: 1%;
-    box-shadow: 0px 1vh 1vw 0px rgba(0,0,0,0.75);
+    box-shadow: 0.6vmax 0.6vmax 0 0px var(--mono9);
 }
 #calendar hr {
     margin-top: 0;
     margin-bottom: 1%;
 }
 #calendar-title {
-    font-size: 1.8em;
+    font-size: 1.75em;
 }
 #calendar-content {
-    font-size: 0;
     margin: auto;
-    overflow: auto;
-    border-top: 1px solid #888;
-    border-left: 1px solid #888;
-    border-bottom: 1px solid #888;
 }
 #calendar-content .title {
-    font-size: 14;
+    font-size: 0.9em;
 }
 #calendar-content hr {
     margin: 0;
-    color: #888;
-    background-color: #888;
+    color: var(--mono7);
+    background-color: var(--mono7);
 }
-#calendar-content .hour-marks {
+#calendar-content #hms {
+    display: inline-block;
     float: left;
-    font-size: 0.625em;
-    margin: 0;
-    width: 4%;
-    height: 85%;
-    border-right: 1px solid #888;
-    overflow: hidden;
     text-align: right;
+    width: 3%;
+    height: 85%;
+    font-size: 0.625em;
+    color: var(--mono10);
+    border: 1px solid #888;
+}
+#calendar-content #dh {
+    font-size: 0.8em;
+    display: inline-block;
+    float: left;
+    width: 94%;
+    height: 85%;
+    border: 1px solid #888;
+    border-right: 0px;
 }
 #calendar-content .day {
     float: left;
     text-align: center;
     font-size: 1em;
     margin: 0;
-    width: 13.5%;
+    width: 13.9%;
     border-right: 1px solid #888;
-    height: 85%;
+    height: 100%;
 }
 
 
@@ -134,11 +137,11 @@ html {
     width: 100%; /* Full width */
     height: 100%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: var(--mono10); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
 #add-class-content {
-    background-color: #fefefe;
+    background-color: var(--mono1);
     margin: 5% auto; /* 15% from the top and centered */
     padding: 20px;
     border: 1px solid #888;
@@ -149,16 +152,16 @@ html {
     margin-top: 0;
 }
 #close-menu {
-    color: #333;
+    color: var(--mono8);
     float: right;
-    font-size: 28px;
+    font-size: 1.75em;
     font-weight: bold;
-    background-color: #fefefe;
+    background-color: var(--mono1);
     border: 0px;
 }
 #close-menu:hover,
 #close-menu:focus {
-    color: #b40000;
+    color: var(--med-important-color);
     text-decoration: none;
     cursor: pointer;
 }
@@ -197,8 +200,8 @@ html {
     cursor: pointer;
 }
 .weekDays-selector input[type=checkbox]:checked + label {
-    background: #2AD705;
-    color: #ffffff;
+    background: var(--med-important-color);
+    color: var(--mono10);
 }
 
 ::-webkit-scrollbar {
@@ -207,21 +210,24 @@ html {
 
 ::-webkit-scrollbar-track {
     border-radius: 3px;
-    background-color: #FFF;
+    background-color: var(--mono1);
 }
 
 ::-webkit-scrollbar-thumb {
     border-radius: 3px;
-    background-color: #111;
+    background-color: var(--mono4);
 }
 
 
 @media (orientation: landscape) and (min-width: 900px){
+    html {
+        font-size: 1em;
+    }
     /*  ---------  */
     /* | CONTENT | */
     /*  ---------  */
     #content {
-        background-color: #333;
+        background-color: var(--mono3);
     }
 
     /*  ---------  */
@@ -231,9 +237,6 @@ html {
         width: 19%;
         height: 96%;
         float: left;
-        border-radius: 0;
-        border-bottom-left-radius: 1vw;
-        border-top-left-radius: 1vw;
         overflow: scroll;
     }
 
@@ -241,37 +244,37 @@ html {
     /* | CALENDAR | */
     /*  ----------  */
     #calendar {
-        width: 77%;
-        height: 94%;
+        width: 76%;
+        height: 96%;
         float: right;
-        border-radius: 0;
-        border-bottom-right-radius: 1vw;
-        border-top-right-radius: 1vw;
     }
-    #calendar-content .hour-marks {
-        float: left;
-        margin: 0;
-        width: 4%;
-        height: 92%;
-        border-right: 1px solid #888;
-        overflow: hidden;
-        text-align: right;
+    #calendar-content #hms {
+        font-size: 0.875em;
     }
     #calendar-content .day {
-        width: 13.57%;
-        height: 92%;
+        font-size: 1.25em;
     }
-
+    #calendar-content #hms {
+        width: 2%;
+        height: 91%;
+    }
+    #calendar-content #dh {
+        width: 95%;
+        height: 91%;
+    }
+    #calendar-content .day {
+        width: 14.1%;
+    }
     ::-webkit-scrollbar {
-        width: 12px;
+        width: 5px;
     }
 
     ::-webkit-scrollbar-track {
-        border-radius: 6px;
+        border-radius: 2px;
     }
 
     ::-webkit-scrollbar-thumb {
-        border-radius: 6px;
-        background-color: #333;
+        border-radius: 2px;
+        background-color: var(--mono4);
     }
 }

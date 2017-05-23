@@ -1,15 +1,12 @@
-function Class(name, crns, times, days, color) {
+function Class(name, crns, times, days, color, selected) {
     this.name = name;
     this.crns  = crns; // Array of registration numbers for the class
     this.times = times; // 2D Array of times, [start time, end time]
     this.days = days; // 2D array of days, each option is formatted as a binary array with 0 if it's not on that day and 1 if it is
     this.id = 0;
-    var _this = this;
-    this.rand_color = function() {
-        return "rgb("+Math.floor(Math.random()*256)+","+Math.floor(Math.random()*256)+","+Math.floor(Math.random()*256)+")"
-    }
-    color = color || _this.rand_color();
     this.color = color;
+    this.selected = selected || this.crns.length;
+    var _this = this;
     this.tConvert = function(time) {
         // Check correct time format and split into components
         time = time.toString().match (/^([01]?\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
@@ -26,13 +23,15 @@ function Class(name, crns, times, days, color) {
         var weekday_ids = ['#sunday', '#monday', '#tuesday', '#wednesday', '#thursday', '#friday', '#saturday']
         var selected_crn = $("input:radio[name='classlist"+this.id+"']:checked").val();
         if (selected_crn != 'none' && selected_crn != null) {
-            var selection = this.crns.indexOf(selected_crn);
-            for(var j = 0; j < this.days[selection].length; j++) {
-                if (this.days[selection][j]) {
-                    var start_time_hour = parseInt(this.times[selection][0].substr(0,2));
-                    var start_time_min = parseInt(this.times[selection][0].substr(3,5));
-                    var end_time_hour = this.times[selection][1].substr(0,2);
-                    var end_time_min = this.times[selection][1].substr(3,5);
+            this.selected = this.crns.indexOf(selected_crn);
+            for(var j = 0; j < this.days[this.selected].length; j++) {
+                if (this.days[this.selected][j]) {
+                    var c1 = this.times[this.selected][0].indexOf(':');
+                    var c2 = this.times[this.selected][1].indexOf(':');
+                    var start_time_hour = parseInt(this.times[this.selected][0].substr(0,c1));
+                    var start_time_min = parseInt(this.times[this.selected][0].substr(c1+1));
+                    var end_time_hour = this.times[this.selected][1].substr(0,c2);
+                    var end_time_min = this.times[this.selected][1].substr(c2+1);
                     var start_percent = parseFloat(start_time_min) / 60.0;
                     var end_percent = parseFloat(end_time_min) / 60.0;
                     var length = (parseFloat(end_time_hour)-parseFloat(start_time_hour)) - (start_percent - end_percent);
@@ -49,10 +48,14 @@ function Class(name, crns, times, days, color) {
                 }
             }
         }
+        if(classes.length > 0) {
+            window.history.replaceState(null, null, "?string="+createString());
+        }
+        else {
+            window.history.replaceState(null, null, '');
+        }
     }
-    this.add_to_list = function(container, twentyfourhour, old_selection) {
-        old_selection = old_selection || 'none';
-        (old_selection != 'none') ? old_selection = this.crns[parseInt(old_selection)] : old_selection = 'none';
+    this.add_to_list = function(container, twentyfourhour) {
         this.id = $('.class').length.toString();
         var day_strings = [];
         var time_strings = [];
@@ -80,7 +83,7 @@ function Class(name, crns, times, days, color) {
         }
         container.append("<div class='class' id='classlist"+this.id+"'></div>");
         $('#classlist'+this.id).append("<div class='name'>"+$('<div/>').text(this.name).html()+"</div>");
-        $('#classlist'+this.id).append("<button class='remove_class' onclick='javascript:remove_class("+this.id+");'><i class='fa fa-minus' aria-hidden='true'></i></button>")
+        $('#classlist'+this.id).append("<button class='removeclass' onclick='javascript:remove_class("+this.id+");'><i class='fa fa-minus' aria-hidden='true'></i></button>")
         $('#classlist'+this.id).append("<button class='edit' onclick='javascript:edit_class("+this.id+");'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></button>");
         $('#classlist'+this.id).append("<form id='class"+this.id+"form"+"'></form>");
         for (var i = 0; i < crns.length; i++) {
@@ -91,11 +94,12 @@ function Class(name, crns, times, days, color) {
         $('#class'+this.id+'form').append("<input type='radio' name='classlist"+this.id+"' value='none' class='option'>");
         $('#class'+this.id+'form').append("<div class='days'>None</div>");
         $('#classlist'+this.id).append("<div class='crn-label'>Selected CRN:&nbsp;</div><div class='crn-label' id='class"+this.id+"crn'>none</div");
-        $('input[type=radio][name=classlist'+this.id+'][value='+old_selection+']').prop('checked', 'checked');
-        _this.add_to_calendar();
         $('input[type=radio][name=classlist'+this.id+']').change(function() {
             $('#class'+_this.id+'crn').text($('input[type=radio][name=classlist'+_this.id+']:checked').val());
             _this.add_to_calendar();
         });
+        $('input[type=radio][name=classlist'+this.id+'][value='+this.crns[this.selected]+']').prop('checked', 'true');
+        $('#class'+_this.id+'crn').text($('input[type=radio][name=classlist'+_this.id+']:checked').val());
+        _this.add_to_calendar();
     }
 }
