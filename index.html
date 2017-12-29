@@ -1,6 +1,9 @@
-<html>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html dir="ltr" lang="en" xml:lang="en" xmlns= "http://www.w3.org/1999/xhtml">
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="UTF-8">
+        <meta name="google" content="notranslate">
+        <meta http-equiv="Content-Language" content="en">
         <title>Schedule Maker</title>
         <link rel="icon" href="/resources/favicon.ico">
     </head>
@@ -20,7 +23,7 @@
         </div>
         
         <div id="calendar">
-            <div id="calendar-title">Weekly Schedule</div>
+            <div id="calendar-title">Weekly Schedule <button id="save-ics" onclick='javascript:openICSdialog();'>Export calendar</button></div>
             <hr>
             <div id="calendar-content">
                 <div id='hms' class="hour-marks">
@@ -59,7 +62,8 @@
                 <button id='close-menu' onclick='javascript:cancel_class_edit();'><i class="fa fa-times" aria-hidden="true"></i></button>
                 <form id='add-class-form' onsubmit="return false">
                     Name of class: <input type='text' id='add-class-name'><br>
-                    Color: <input id='add-class-color' class='jscolor' value='#FFFFFF'><br>
+                    Short Name: <input type='text' id='add-class-short-name'><br>
+                    Color: <input id='add-class-color' class='jscolor' value='#FFFFFF'><button id='rand-color' onclick='javascript:random_color();'>Random Color</button><br>
                     Add Option: <button id='add-option' onclick='javascript:add_class_option();'><i class='fa fa-plus' aria-hidden='true'></i></button>
                     <div id='option0' class='add-class-option'>
                         Registration Number: <input type='text' id='reg-num0'>
@@ -89,6 +93,17 @@
                 <button type='submit' id='finish-add-class' onclick='javascript:add_class();'>Done!</button>
             </div>
         </div>
+        <div id="ics-dialog" class="modal2">
+            <div id="ics-dialog-content">
+                <div class='title'>Export schedule for Google Calendar or Outlook</div><hr>
+                <button id='close-ics' onclick='javascript:cancel_ics_export();'><i class="fa fa-times" aria-hidden="true"></i></button>
+                <form id='ics-form' onsubmit='return false'>
+                    Semester start date: <input type="date" id="ics-start-date"><br>
+                    Semester end date: <input type="date" id="ics-end-date"><br>
+                    <button id="export-ics" onclick='javascript:saveICS();'>Export!</button>
+                </form>
+            </div>
+        </div>
     </div>
     <link rel="stylesheet" type="text/css" href='/resources/css/palette.css'>
     <link rel="stylesheet" type="text/css" href="/resources/css/font-awesome/css/font-awesome.min.css">
@@ -98,6 +113,6 @@
     <script src="./js/jscolor.min.js"></script>
     <script src="./js/Class.min.js"></script>
     <script src="./js/Encode.min.js"></script>
-    <script src="./js/Main.js"></script>
+    <script src="./js/Main.min.js"></script>
     <script src="/resources/js/tracking.js"></script>
 </html>
